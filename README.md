@@ -1,2 +1,2 @@
 # Contact
-Recycler view, SQLlite
+A Contact List Using RecycleView and Room.
