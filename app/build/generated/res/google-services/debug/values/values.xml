@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1096453986975-re57lfn7canr1slvju4j0a7fk09l40jo.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://contact-ef549-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">1096453986975</string>
+    <string name="google_api_key" translatable="false">AIzaSyCcs2V40WkVrlGelNtndXf2bDdEzv4OR24</string>
+    <string name="google_app_id" translatable="false">1:1096453986975:android:132310655f0afebee7e0aa</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCcs2V40WkVrlGelNtndXf2bDdEzv4OR24</string>
+    <string name="google_storage_bucket" translatable="false">contact-ef549.appspot.com</string>
+    <string name="project_id" translatable="false">contact-ef549</string>
+</resources>

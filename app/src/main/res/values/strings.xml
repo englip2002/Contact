@@ -12,4 +12,6 @@
     <string name="cancel">Cancel</string>
     <string name="contact_saved">Contact Saved</string>
     <string name="no_record">No record</string>
+    <string name="error_profile">Please enter phone number.</string>
+    <string name="upload">Upload</string>
 </resources>

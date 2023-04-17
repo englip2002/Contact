@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
@@ -15,6 +16,8 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import my.edu.tarc.contact.databinding.FragmentProfileBinding
 import java.io.File
 import java.io.FileNotFoundException
@@ -36,8 +39,8 @@ class ProfileFragment : Fragment(), MenuProvider {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
+        // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         //Initialise Shared Preference
@@ -85,7 +88,10 @@ class ProfileFragment : Fragment(), MenuProvider {
                 apply()
             }
 
+            //save to local storage
             saveProfilePicture(binding.imageViewPicture)
+            //sav to cloud storage
+            uploadProfilePicture()
 
             Toast.makeText(context, getString(R.string.profile_saved), Toast.LENGTH_SHORT).show()
         }else if(menuItem.itemId == android.R.id.home){
@@ -127,5 +133,27 @@ class ProfileFragment : Fragment(), MenuProvider {
         }
         return null
     }
-}
+
+    //upload picture to firebase
+    private fun uploadProfilePicture(){
+        val filename = "profile.png"
+        val file = Uri.fromFile(File(this.context?.filesDir, filename))
+        try {
+            var storageRef = Firebase.storage("gs://contact-ef549.appspot.com").reference
+            //share preference
+            val userRef = sharedPreferences.getString(getString(R.string.phone),"")
+            if (userRef.isNullOrEmpty()){
+                //show toast if user reference is not available
+                Toast.makeText(context,getString(R.string.error_profile), Toast.LENGTH_SHORT).show()
+            }
+            else{
+                var profilePictureRef = storageRef.child("file").child(userRef)
+                profilePictureRef.putFile(file)
+            }
+
+        }catch (e:FileNotFoundException){
+            e.printStackTrace()
+        }
+    }
+}//End Of Class
 
