@@ -2,7 +2,6 @@
   <library name="Gradle: com.google.firebase:firebase-storage:20.1.0@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/94b6754aaf067219a02c18ff7e346337/transformed/firebase-storage-20.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/94b6754aaf067219a02c18ff7e346337/transformed/firebase-storage-20.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/94b6754aaf067219a02c18ff7e346337/transformed/firebase-storage-20.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>

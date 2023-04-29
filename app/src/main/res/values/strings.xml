@@ -14,4 +14,7 @@
     <string name="no_record">No record</string>
     <string name="error_profile">Please enter phone number.</string>
     <string name="upload">Upload</string>
+    <string name="delete">delete</string>
+    <string name="delete_record">Delete this contact?</string>
+    <string name="edit">Edit</string>
 </resources>

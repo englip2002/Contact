@@ -18,11 +18,12 @@ import com.google.firebase.ktx.Firebase
 import my.edu.tarc.contact.databinding.FragmentFirstBinding
 import my.tarc.mycontact.ContactAdapter
 import my.tarc.mycontact.ContactViewModel
+import my.tarc.mycontact.RecordClickListener
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment(), MenuProvider {
+class FirstFragment : Fragment(), MenuProvider, RecordClickListener {
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -54,7 +55,7 @@ class FirstFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ContactAdapter()
+        val adapter = ContactAdapter(this)
 
         //Add an observer
         myContactViewModel.contactList.observe(
@@ -65,8 +66,8 @@ class FirstFragment : Fragment(), MenuProvider {
                     binding.textViewCount.text = getString(R.string.no_record)
                 } else {
                     binding.textViewCount.isVisible = false
-                    adapter.setContact(it)
                 }
+                adapter.setContact(it)
             }
         )
         binding.recyclerView.adapter = adapter
@@ -101,5 +102,12 @@ class FirstFragment : Fragment(), MenuProvider {
             }
         }
         return true
+    }
+
+    //tell the second fragment to know user clicked which one
+    override fun onRecordClickListener(index: Int) {
+        //selectedIndex from viewModel
+        myContactViewModel.selectedIndex = index
+        findNavController().navigate(R.id.nav_second)
     }
 }

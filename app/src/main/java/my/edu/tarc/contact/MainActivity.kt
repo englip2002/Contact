@@ -44,14 +44,26 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener{
                 _,destination,_->
-            if(destination.id==R.id.nav_settings || destination.id == R.id.nav_second)
+            if(destination.id==R.id.nav_settings)
             {
+                //edit the visibility of the 'plus' button
                 binding.fab.visibility = View.INVISIBLE
-            }else{
+                //edit the title of fragment
+                title = getString(R.string.action_settings)
+            }
+            else if(destination.id == R.id.nav_second){
+                if(contactViewModel.selectedIndex == -1){
+                    title = getString(R.string.add)
+                }
+                title = getString(R.string.edit)
+            }
+            else{
                 binding.fab.visibility = View.VISIBLE
+                title = getString(R.string.app_name)
             }
         }
 
+        //plus button
         binding.fab.setOnClickListener { view ->
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
