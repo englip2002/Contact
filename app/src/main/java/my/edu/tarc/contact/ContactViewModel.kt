@@ -36,4 +36,9 @@ class ContactViewModel (application: Application): AndroidViewModel(application)
     fun deleteContact(contact: Contact) = viewModelScope.launch {
         repository.delete(contact)
     }
+
+    //override the local data when cloud data is downloaded
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
 }

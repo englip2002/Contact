@@ -67,4 +67,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.activity:activity-ktx:1.7.0'
 
+    //Volley Dependency (for server download)
+    implementation 'com.android.volley:volley:1.2.1'
+
 }

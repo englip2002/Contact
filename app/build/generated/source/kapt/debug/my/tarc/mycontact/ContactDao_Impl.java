@@ -7,6 +7,7 @@ import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
@@ -32,6 +33,8 @@ public final class ContactDao_Impl implements ContactDao {
   private final EntityDeletionOrUpdateAdapter<Contact> __deletionAdapterOfContact;
 
   private final EntityDeletionOrUpdateAdapter<Contact> __updateAdapterOfContact;
+
+  private final SharedSQLiteStatement __preparedStmtOfDeleteAll;
 
   public ContactDao_Impl(RoomDatabase __db) {
     this.__db = __db;
@@ -95,6 +98,13 @@ public final class ContactDao_Impl implements ContactDao {
         }
       }
     };
+    this.__preparedStmtOfDeleteAll = new SharedSQLiteStatement(__db) {
+      @Override
+      public String createQuery() {
+        final String _query = "DELETE FROM contact";
+        return _query;
+      }
+    };
   }
 
   @Override
@@ -143,6 +153,25 @@ public final class ContactDao_Impl implements ContactDao {
           return Unit.INSTANCE;
         } finally {
           __db.endTransaction();
+        }
+      }
+    }, continuation);
+  }
+
+  @Override
+  public Object deleteAll(final Continuation<? super Unit> continuation) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteAll.acquire();
+        __db.beginTransaction();
+        try {
+          _stmt.executeUpdateDelete();
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+          __preparedStmtOfDeleteAll.release(_stmt);
         }
       }
     }, continuation);

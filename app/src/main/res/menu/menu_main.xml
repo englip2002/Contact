@@ -13,4 +13,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_download"
+        android:icon="@drawable/baseline_cloud_download_24"
+        android:title="@string/download"
+        app:showAsAction="ifRoom" />
 </menu>
